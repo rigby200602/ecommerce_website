@@ -6,7 +6,7 @@ import { AppContext } from '../context/AppContext'
 
 const Navbar = () => {
     const [open, setOpen] = useState(false)
-    const {user, setUser,setShowUserLogin, navigate,showUserLogin} = useContext(AppContext);
+    const { user, setUser, setShowUserLogin, navigate, showUserLogin } = useContext(AppContext);
 
     const logout = async () => {
         setUser(null);
@@ -36,16 +36,31 @@ const Navbar = () => {
                     <img className='w-6 opacity-80' src={assets.nav_cart_icon} alt='cart' />
                     <button className="absolute -top-2 -right-3 text-xs text-white bg-primary w-[18px] h-[18px] rounded-full">3</button>
                 </div>
-
-                <button className="cursor-pointer px-8 py-2 bg-primary hover:bg-primary-dull transition text-white rounded-full">
-                    Login
-                </button>
+                {!user ?
+                    (
+                        <button onClick={() => setShowUserLogin(true)}
+                            className="cursor-pointer px-8 py-2 bg-primary hover:bg-primary-dull transition text-white rounded-full">
+                            Login
+                        </button>
+                    ) : (
+                        <div className='relative group'>
+                            <img src={assets.profile_icon} className='w-10' alt="" />
+                            <ul className='hidden group-hover:block absolute top-10 right-0 bg-white shadow border border-gray-200
+                       py-2.5 w-30 rounded-md text-sm z-40'>
+                                <li onClick={() => navigate("my-orders")} className='p-1.5 pl-3 hover:bg-primary/10 cursor-pointer'>My Orders</li>
+                                <li onClick={logout} className='p-1.5 pl-3 hover:bg-primary/10 cursor-pointer'>Logout</li>
+                            </ul>
+                        </div>
+                    )}
             </div>
+
 
             <button onClick={() => open ? setOpen(false) : setOpen(true)} aria-label="Menu" className="sm:hidden">
                 {/* Menu Icon SVG */}
                 <img src={assets.menu_icon} alt='menu' />
             </button>
+
+
 
             {/* Mobile Menu */}
             {open && (
@@ -58,10 +73,11 @@ const Navbar = () => {
 
                     <NavLink to="/contract" onClick={() => setOpen(false)}>Contract</NavLink>
                     {!user ? (
-                        <button onClick={() => { setOpen(false); 
-                            setShowUserLogin(true); 
+                        <button onClick={() => {
+                            setOpen(false);
+                            setShowUserLogin(true);
                             console.log(showUserLogin);
-                         }}
+                        }}
                             className="cursor-pointer px-6 py-2 mt-2 bg-indigo-500 hover:bg-indigo-600 transition text-white rounded-full text-sm">
                             Login
                         </button>
