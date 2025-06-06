@@ -4,7 +4,6 @@ import { assets } from '../assets/assets';
 import { AppContext } from '../context/AppContext';
 
 const ProductCard = ({ product }) => {
-    const [count, setCount] = React.useState(0);
     const {currency, addToCart, removeCartItem, cartItems, navigate} = useContext(AppContext)
 
     return product && (
