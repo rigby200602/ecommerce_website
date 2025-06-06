@@ -15,15 +15,15 @@ export const AppContextProvider = ({ children }) => {
     const [showUserLogin, setShowUserLogin] = useState(false);
     const [product, setProduct] = useState([])
     const [cartItems, setCartItems] = useState({})
-// Fetch All Products
+    // Fetch All Products
     const fetchProduct = async () => {
         setProduct(dummyProducts)
     }
-// Add Product to Cart 
-    const addToCart = () =>{
+    // Add Product to Cart 
+    const addToCart = () => {
         let cartData = structuredClone(cartItems);
 
-        if (cartData[itemId]){
+        if (cartData[itemId]) {
             cartData[itemId] += 1;
         } else {
             cartData[itemId] = 1;
@@ -31,15 +31,24 @@ export const AppContextProvider = ({ children }) => {
         setCartItems(cartData);
         toast.success("Added to Cart")
     }
+    // Update Cart Item Quantity
+    const updateCartItem = (itemId, quantity) => {
+        let cartData = structuredClone(cartItems);
+        cartData[itemId] = quantity;
+        setCartItems(cartData)
+        toast.success("Cart Updated")
+    }
 
 
-    useEffect(()=>{
+    useEffect(() => {
         fetchProduct()
-    },[])
+    }, [])
 
-    const value = { navigate, user, setUser, isSeller, setIsSeller,
-        showUserLogin, setShowUserLogin, product, currency
-     }
+    const value = {
+        navigate, user, setUser, isSeller, setIsSeller,
+        showUserLogin, setShowUserLogin, product, currency, addToCart,
+        updateCartItem
+    }
     return <AppContext.Provider value={value}>
         {children}
     </AppContext.Provider>
