@@ -38,6 +38,19 @@ export const AppContextProvider = ({ children }) => {
         setCartItems(cartData)
         toast.success("Cart Updated")
     }
+    // Remove Product from Card
+    const removeCartItem = () => {
+        let cartData = structuredClone(cartItems);
+        if (cartData[itemId]) {
+            cartData[itemId] -= 1;
+            if (cartData[itemId] === 0 ){
+                delete cartData[itemId]
+            }
+        }
+        toast.success("Removed from Cart")
+        setCartItems(cartData)
+    }
+    
 
 
     useEffect(() => {
@@ -46,8 +59,8 @@ export const AppContextProvider = ({ children }) => {
 
     const value = {
         navigate, user, setUser, isSeller, setIsSeller,
-        showUserLogin, setShowUserLogin, product, currency, addToCart,
-        updateCartItem
+        showUserLogin, setShowUserLogin, product, currency, cartItems,
+        addToCart, updateCartItem, removeCartItem
     }
     return <AppContext.Provider value={value}>
         {children}
