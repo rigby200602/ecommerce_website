@@ -20,7 +20,7 @@ export const AppContextProvider = ({ children }) => {
         setProducts(dummyProducts)
     }
     // Add Product to Cart 
-    const addToCart = () => {
+    const addToCart = (itemId) => {
         let cartData = structuredClone(cartItems);
 
         if (cartData[itemId]) {
@@ -39,14 +39,14 @@ export const AppContextProvider = ({ children }) => {
         toast.success("Cart Updated")
     }
     // Remove Product from Card
-    const removeCartItem = () => {
+    const removeCartItem = (itemId) => {
         let cartData = structuredClone(cartItems);
         if (cartData[itemId]) {
             cartData[itemId] -= 1;
             if (cartData[itemId] === 0 ){
                 delete cartData[itemId]
             }
-        }
+        }     
         toast.success("Removed from Cart")
         setCartItems(cartData)
     }
