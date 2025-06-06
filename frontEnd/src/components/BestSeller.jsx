@@ -4,7 +4,7 @@ import { AppContext } from '../context/AppContext'
 
 const BestSeller = () => {
   
-  const products = useContext(AppContext)
+  const {products} = useContext(AppContext)
 
   return (
     <div className='mt-16'>

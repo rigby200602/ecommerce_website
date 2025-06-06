@@ -30,7 +30,7 @@ const ProductCard = ({ product }) => {
                     <div className="text-indigo-500">
                         {!cartItems[product._id] ? (
                             <button className="flex items-center justify-center gap-1 bg-indigo-100 border border-indigo-300 md:w-[80px] w-[64px] h-[34px] rounded text-indigo-600 font-medium" onClick={() => setCount(1)} >
-                                <img src={assets.add_icon} alt='add'/>
+                                <img src={assets.cart_icon} alt='add'/>
                                 Add
                             </button>
                         ) : (
