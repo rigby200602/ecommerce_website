@@ -5,6 +5,7 @@ import Home from './pages/Home'
 import { Toaster } from 'react-hot-toast'
 import Footer from './components/Footer'
 import { AppContext } from './context/AppContext'
+import Login from './components/Login'
 
 const App = () => {
   
