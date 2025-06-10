@@ -8,7 +8,7 @@ const Navbar = () => {
     const [open, setOpen] = useState(false)
     const { user, setUser, setShowUserLogin, navigate, showUserLogin,
         searchQuery, setSearchQuery
-     } = useContext(AppContext);
+    } = useContext(AppContext);
 
     const logout = async () => {
         setUser(null);
@@ -16,8 +16,8 @@ const Navbar = () => {
     }
 
     useEffect(() => {
-        if(searchQuery.length >0) {
-           navigate("/products")
+        if (searchQuery.length > 0) {
+            navigate("/products")
         }
     }, [searchQuery])
 
@@ -37,7 +37,7 @@ const Navbar = () => {
 
                 <div className="hidden lg:flex items-center text-sm gap-2 border border-gray-300 px-3 rounded-full">
                     <input onChange={(e) => setSearchQuery(e.target.value)}
-                    className="py-1.5 w-full bg-transparent outline-none placeholder-gray-500" type="text" placeholder="Search products" />
+                        className="py-1.5 w-full bg-transparent outline-none placeholder-gray-500" type="text" placeholder="Search products" />
                     <img className='w-4 h-4' src={assets.search_icon} alt='search' />
                 </div>
 
