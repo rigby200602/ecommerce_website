@@ -15,6 +15,7 @@ export const AppContextProvider = ({ children }) => {
     const [showUserLogin, setShowUserLogin] = useState(false);
     const [products, setProducts] = useState([])
     const [cartItems, setCartItems] = useState({})
+    const [searchQuery, setSearchQuery] = useState({})
     // Fetch All Products
     const fetchProduct = async () => {
         setProducts(dummyProducts)
@@ -43,14 +44,14 @@ export const AppContextProvider = ({ children }) => {
         let cartData = structuredClone(cartItems);
         if (cartData[itemId]) {
             cartData[itemId] -= 1;
-            if (cartData[itemId] === 0 ){
+            if (cartData[itemId] === 0) {
                 delete cartData[itemId]
             }
-        }     
+        }
         toast.success("Removed from Cart")
         setCartItems(cartData)
     }
-    
+
 
 
     useEffect(() => {
@@ -60,7 +61,8 @@ export const AppContextProvider = ({ children }) => {
     const value = {
         navigate, user, setUser, isSeller, setIsSeller,
         showUserLogin, setShowUserLogin, products, currency, cartItems,
-        addToCart, updateCartItem, removeCartItem
+        addToCart, updateCartItem, removeCartItem,
+        searchQuery, setSearchQuery
     }
     return <AppContext.Provider value={value}>
         {children}
