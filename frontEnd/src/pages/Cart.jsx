@@ -6,7 +6,7 @@ import { assets, dummyAddress } from '../assets/assets'
 const Cart = () => {
     const [showAddress, setShowAddress] = useState(false)
 
-    const { products, currency, cartItems, removeFromCart, getCartCount,
+    const { products, currency, cartItems, removeCartItem, getCartCount,
         updateCartItem, navigate, getCartAmount } = useContext(AppContext)
     const [cartArray, setCartArray] = useState([])
     const [Address, setAddress] = useState(dummyAddress)
@@ -16,7 +16,7 @@ const Cart = () => {
     const getCart = () => {
         let tempArray = []
         for (const key in cartItems) {
-            const product = products.find((item) => item._id === key)
+            const product = products.find(item => item._id === key)
             product.quantity = cartItems[key]
             tempArray.push(product)
         }
@@ -59,7 +59,7 @@ const Cart = () => {
                                     <p>Weight: <span>{product.weight || "N/A"}</span></p>
                                     <div className='flex items-center'>
                                         <p>Qty:</p>
-                                        <select className='outline-none'>
+                                        <select onChange={e => updateCartItem(product._id, Number(e.target.value))} value={cartItems[product._id]} className="outline-none">
                                             {Array(cartItems[product._id] > 9 ? cartItems[product._id] : 9).fill('').map((_, index) => (
                                                 <option key={index} value={index + 1}>{index + 1}</option>
                                             ))}
@@ -69,7 +69,7 @@ const Cart = () => {
                             </div>
                         </div>
                         <p className="text-center">{currency}{product.offerPrice * product.quantity}</p>
-                        <button onClick={() => removeFromCart(product)} className="cursor-pointer mx-auto">
+                        <button onClick={() => removeCartItem(product._id)} className="cursor-pointer mx-auto">
                             <img className="inline-block w-6 h-6" src={assets.remove_icon} alt="remove" />
                         </button>
                     </div>)
