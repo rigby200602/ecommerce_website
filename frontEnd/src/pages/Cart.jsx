@@ -16,9 +16,7 @@ const Cart = () => {
     const getCart = () => {
         let tempArray = []
         for (const key in cartItems) {
-            const product = products.find((item) => {
-                item._id === key
-            })
+            const product = products.find((item) => item._id === key)
             product.quantity = cartItems[key]
             tempArray.push(product)
         }
@@ -98,7 +96,7 @@ const Cart = () => {
                         </button>
                         {showAddress && (
                             <div className="absolute top-12 py-1 bg-white border border-gray-300 text-sm w-full">
-                                {dummyAddress.map((address, index) => (
+                                {Address.map((address, index) => (
                                     <p onClick={() => {setSelectedAddress(address);setShowAddress(false)}} className="text-gray-500 p-2 hover:bg-gray-100">
                                     {address.street},{address.city}, {address.state}, {address.country}
                                 </p>

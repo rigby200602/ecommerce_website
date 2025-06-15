@@ -28,7 +28,7 @@ const ProductDetails = () => {
     }, [product])
 
     return product && (
-        <div className="mt-12">
+        <div key={id} className="mt-12">
             <p>
                 <Link to={'/'}>Home</Link> /
                 <Link to={'/products'}> Products</Link> /
@@ -92,8 +92,8 @@ const ProductDetails = () => {
                     <div className='w-20 h-0.5 bg-primary rounded-full'></div>
                 </div>
                 <div className='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2 md:gap-6'>
-                    {relatedProducts.filter((product) => product.inStock).map((product, i) => (
-                        <ProductCard key={i} product={product} />
+                    {relatedProducts.filter((product) => product.inStock).map((product) => (
+                        <ProductCard key={product._id} product={product} />
                     ))}
                 </div>
                 <button onClick={() => {navigate('/products');scrollTo(0,0)}}
