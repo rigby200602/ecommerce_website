@@ -10,14 +10,14 @@ const ProductDetails = () => {
     const { products, navigate, currency, addToCart } = useContext(AppContext)
     const { id } = useParams()
 
-    const [thumbnail, setThumbnail] = useState(null);
+    const [thumbnail, setThumbnail] = useState(null)
     const [relatedProducts, setRelatedProducts] = useState([])
 
     const product = products.find((item) => item._id === id);
     // Find duplicated products
     useEffect(() => {
         if (products.length > 0) {
-            let productsCopy = products.slice();
+            let productsCopy = products.slice()
             productsCopy = productsCopy.filter((item) => product.category === item.category)
             setRelatedProducts(productsCopy.slice(0, 5))
         }
@@ -28,7 +28,7 @@ const ProductDetails = () => {
     }, [product])
 
     return product && (
-        <div key={id} className="mt-12">
+        <div key={product._id} className="mt-12">
             <p>
                 <Link to={'/'}>Home</Link> /
                 <Link to={'/products'}> Products</Link> /
