@@ -16,7 +16,6 @@ const Login = () => {
             name: "test"
         })
         setShowUserLogin(false)
-        console(email,name)
     }
 
     return (
