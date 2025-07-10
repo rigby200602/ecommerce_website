@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { assets } from "../../assets/assets";
+import { assets, categories } from "../../assets/assets";
 
 const AddProduct = () => {
   const [files, setFiles] = useState([]);
@@ -73,6 +73,7 @@ const AddProduct = () => {
             Product Description
           </label>
           <textarea
+            onChange={(e) => setDescription(e.target.value)} value={description}
             id="product-description"
             rows={4}
             className="outline-none md:py-2.5 py-2 px-3 rounded border border-gray-500/40 resize-none"
@@ -84,19 +85,16 @@ const AddProduct = () => {
             Category
           </label>
           <select
+            onChange={(e) => setCategory(e.target.value)} value={category}
             id="category"
             className="outline-none md:py-2.5 py-2 px-3 rounded border border-gray-500/40"
           >
             <option value="">Select Category</option>
-            {[
-              { name: "Electronics" },
-              { name: "Clothing" },
-              { name: "Accessories" },
-            ].map((item, index) => (
-              <option key={index} value={item.name}>
-                {item.name}
-              </option>
+            {categories.map((item, index) => (
+              <option key={index} value={item.path}>{item.path}</option>
             ))}
+           
+  
           </select>
         </div>
         <div className="flex items-center gap-5 flex-wrap">
@@ -105,6 +103,7 @@ const AddProduct = () => {
               Product Price
             </label>
             <input
+              onChange={(e) => setPrice(e.target.value)} value={price}
               id="product-price"
               type="number"
               placeholder="0"
@@ -117,6 +116,7 @@ const AddProduct = () => {
               Offer Price
             </label>
             <input
+              onChange={(e) => setOfferPrice(e.target.value)} value={offerPrice}
               id="offer-price"
               type="number"
               placeholder="0"
