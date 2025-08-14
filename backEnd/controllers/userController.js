@@ -1,4 +1,4 @@
-import User from "../models/user";
+import User from '../models/User.js'
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken'
 
@@ -28,7 +28,7 @@ export const register = async (req,res) => {
             maxAge: 7 * 24 * 60 * 60 * 1000, // Cookie expiration time
         })
 
-        return res.json({success: true, user: {email: user.email, name: user.name},message: 'User have beencreated'})
+        return res.json({success: true, user: {email: user.email, name: user.name},message: 'User have been created'})
     } catch (e) {
         res.json({ success: false, massage: e.massage})
     }
