@@ -37,7 +37,14 @@ export const productList = async (req,res) => {
 
 //  Get Single Product: /api/product/id
 export const productById = async (req,res) => {
-
+    try {
+        const { id } = req.body
+        const products = await Product.findById({id})
+        res.json({success: true, products})
+    } catch (e) {
+        console.log(e.massage);
+        res.json({success: false, massage: e.massage})
+    }
 }
 
 //  Change Product inStock: /api/product/stock
