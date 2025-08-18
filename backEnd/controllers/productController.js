@@ -26,7 +26,13 @@ export const addProduct = async (req,res) => {
 
 // Get Product: /api/product/list
 export const productList = async (req,res) => {
-
+    try {
+        const products = await Product.find({})
+        res.json({success: true, products})
+    } catch (e) {
+        console.log(e.massage);
+        res.json({success: false, massage: e.massage})
+    }
 }
 
 //  Get Single Product: /api/product/id
