@@ -29,10 +29,10 @@ app.use(cors({origin: allowedOrigins, credentials: true}))
 app.get('/', (req,res) => res.send("API is working"))
 app.use('/api/user', userRouter)
 app.use('/api/seller', sellerRouter)
-app.use('/app/product', productRouter)
+app.use('/api/product', productRouter)
 app.use('/api/cart', cartRouter)
-app.use('/address', addressRouter)
-app.use('/order', orderRouter)
+app.use('/api/address', addressRouter)
+app.use('/api/order', orderRouter)
 
 app.listen(port, () => {
     console.log(`Server is running on http://localhost:${port}`)

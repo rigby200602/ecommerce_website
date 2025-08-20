@@ -1,4 +1,5 @@
 import jwt from "jsonwebtoken";
+import User from "../models/User.js";
 
 // Login Seller: /api/seller/login
 
@@ -31,7 +32,7 @@ export const sellerLogin = async (req, res) => {
 // Seller Auth: /api/seller/is-auth
 export const isSellerAuth = async (req,res) => {
     try {
-        return res.json({success: true, user})
+        return res.json({success: true})
     } catch (e) {
         console.log(e.message)
         res.json({ success: false, massage: e.massage})
