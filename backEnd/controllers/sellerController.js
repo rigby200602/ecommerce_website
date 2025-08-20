@@ -35,7 +35,7 @@ export const isSellerAuth = async (req,res) => {
         return res.json({success: true})
     } catch (e) {
         console.log(e.message)
-        res.json({ success: false, massage: e.massage})
+        res.json({ success: false, message: e.message})
     }
 }
 
@@ -47,10 +47,10 @@ export const sellerLogOut = async (req,res) => {
             secure: process.env.NODE_ENV === 'production',
             sameSite: process.env.NODE_ENV === 'prouduction' ? 'none' : 'strict',
         })
-        return res.json({success: true, massage: "Logged Out"})
+        return res.json({success: true, message: "Logged Out"})
     }
     catch (e) {
         console.log(e.message)
-        res.json({ success: false, massage: e.massage})
+        res.json({ success: false, message: e.message})
     }
 }

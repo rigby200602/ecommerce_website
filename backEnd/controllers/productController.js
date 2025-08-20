@@ -17,10 +17,10 @@ export const addProduct = async (req,res) => {
 
         await Product.create({...productData, image: imagesUrl})
 
-        res.json({success: true, massage: "Product Added"})
+        res.json({success: true, message: "Product Added"})
     } catch (e) {
-        console.log(e.massage);
-        res.json({success: false, massage: e.massage})
+        console.log(e.message);
+        res.json({success: false, message: e.message})
     }
 }
 
@@ -30,8 +30,8 @@ export const productList = async (req,res) => {
         const products = await Product.find({})
         res.json({success: true, products})
     } catch (e) {
-        console.log(e.massage);
-        res.json({success: false, massage: e.massage})
+        console.log(e.message);
+        res.json({success: false, message: e.message})
     }
 }
 
@@ -42,8 +42,8 @@ export const productById = async (req,res) => {
         const product = await Product.findById({id})
         res.json({success: true, product})
     } catch (e) {
-        console.log(e.massage);
-        res.json({success: false, massage: e.massage})
+        console.log(e.message);
+        res.json({success: false, message: e.message})
     }
 }
 
@@ -54,7 +54,7 @@ export const changeStock = async (req,res) => {
         await Product.findByIdAndUpdate(id, {inStock})
         res.json({success: true, message: "Stock Updated"})
     } catch (e) {
-        console.log(e.massage);
-        res.json({success: false, massage: e.massage})
+        console.log(e.message);
+        res.json({success: false, message: e.message})
     }
 }

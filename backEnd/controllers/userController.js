@@ -31,7 +31,7 @@ export const register = async (req,res) => {
         return res.json({success: true, user: {email: user.email, name: user.name},message: 'User have been created'})
     } catch (e) {
         console.log(e.message)
-        res.json({ success: false, massage: e.massage})
+        res.json({ success: false, message: e.message})
     }
 }
 
@@ -64,7 +64,7 @@ export const login = async (req,res) => {
     }
     catch (e) {
         console.log(e.message)
-        res.json({ success: false, massage: e.massage})
+        res.json({ success: false, message: e.message})
     }
 }
 
@@ -76,7 +76,7 @@ export const isAuth = async (req,res) => {
         return res.json({success: true, user})
     } catch (e) {
         console.log(e.message)
-        res.json({ success: false, massage: e.massage})
+        res.json({ success: false, message: e.message})
     }
 }
 
@@ -88,10 +88,10 @@ export const logOut = async (req,res) => {
             secure: process.env.NODE_ENV === 'production',
             sameSite: process.env.NODE_ENV === 'prouduction' ? 'none' : 'strict',
         })
-        return res.json({success: true, massage: "Logged Out"})
+        return res.json({success: true, message: "Logged Out"})
     }
     catch (e) {
         console.log(e.message)
-        res.json({ success: false, massage: e.massage})
+        res.json({ success: false, message: e.message})
     }
 }
