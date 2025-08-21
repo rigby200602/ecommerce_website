@@ -3,16 +3,28 @@ import { useState } from 'react'
 import { NavLink } from 'react-router-dom'
 import { assets } from '../assets/assets'
 import { AppContext } from '../context/AppContext'
+import toast from 'react-hot-toast'
 
 const Navbar = () => {
     const [open, setOpen] = useState(false)
     const { user, setUser, setShowUserLogin, navigate, showUserLogin,
-        searchQuery, setSearchQuery, getCartCount
+        searchQuery, setSearchQuery, getCartCount, axios
     } = useContext(AppContext);
 
     const logout = async () => {
-        setUser(null);
-        navigate('/')
+        try {
+            const {data} = await axios('/api/user/logout')
+            if (data.success) {
+                toast.success(data.message)
+                setUser(null);
+                navigate('/')
+            } else {
+                toast.error(data.message)
+            }
+        } catch (error) {
+            toast.error(error.message)
+        }
+        
     }
     // When you type something, it will mount to product, search for product that have "searchQuery" in it
     useEffect(() => {
