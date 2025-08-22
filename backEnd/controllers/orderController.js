@@ -5,9 +5,10 @@ import Order from '../models/Order.js'
 
 export const placeOrderCOD = async (req, res) => {
     try {
-        const { userId, items, address } = req.body
+        const userId = req.userId; 
+        const { items, address } = req.body
         if (!address || items.length === 0) {
-            return res.jsom({success: false, message: 'Invalid data'})
+            return res.json({success: false, message: 'Invalid data'})
         }
         // Calculate Amount Using Items
         let amount = await items.reduce(async (acc, item) => {
@@ -35,7 +36,7 @@ export const placeOrderCOD = async (req, res) => {
 // Get Orders by User ID: /api/order/user
 export const getUserOrder = async (req,res) => {
     try {
-        const { userId } = req.body
+        const userId = req.userId; 
         const orders = await Order.find({
             userId,
             $or: [{paymentType: "COD"}, {isPaid: true}]
@@ -50,7 +51,6 @@ export const getUserOrder = async (req,res) => {
 // Get All Orders (for seller/admin): /api/order/seller
 export const getAllOrders = async (req,res) => {
     try {
-        const { userId } = req.body
         const orders = await Order.find({
             $or: [{paymentType: "COD"}, {isPaid: true}]
         }).populate("items.product address").sort({createAt: -1})
