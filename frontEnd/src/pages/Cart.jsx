@@ -2,15 +2,16 @@ import React, { useContext, useEffect } from 'react'
 import { useState } from 'react'
 import { AppContext } from '../context/AppContext'
 import { assets, dummyAddress } from '../assets/assets'
+import { data } from 'react-router-dom'
 
 const Cart = () => {
     const [showAddress, setShowAddress] = useState(false)
 
     const { products, currency, cartItems, removeCartItem, getCartCount,
-        updateCartItem, navigate, getCartAmount } = useContext(AppContext)
+        updateCartItem, navigate, getCartAmount, axios, user } = useContext(AppContext)
     const [cartArray, setCartArray] = useState([])
-    const [Address, setAddress] = useState(dummyAddress)
-    const [selectedAddress, setSelectedAddress] = useState(dummyAddress[0])
+    const [addresses, setAddresses] = useState()
+    const [selectedAddress, setSelectedAddress] = useState(null)
     const [paymentOption, setPaymentOption] = useState("COD")
     
     const getCart = () => {
@@ -22,6 +23,21 @@ const Cart = () => {
         }
         setCartArray(tempArray)
     }
+    const getUserAddress = async () => {
+        try {
+            const {data} = await axios.get('/api/address/get')
+            if (data.success){
+                setAddresses(data.addresses)
+                if (data.addresses.length > 0) {
+                    setSelectedAddress(data.addresses[0])
+                }
+            } else {
+                toast.error(data.message)
+            }
+        } catch (error) {
+            toast.error(error.message)
+        }
+    }
 
     const placeOrder = async () => {
 
@@ -32,6 +48,11 @@ const Cart = () => {
             getCart()
         }
     }, [products, cartItems])
+    useEffect(() => {
+        if(user){
+            getUserAddress()
+        }
+    }, [user])
 
     return products.length > 0 && cartItems ? (
         <div className="flex flex-col md:flex-row mt-16">
@@ -96,7 +117,7 @@ const Cart = () => {
                         </button>
                         {showAddress && (
                             <div className="absolute top-12 py-1 bg-white border border-gray-300 text-sm w-full">
-                                {Address.map((address, index) => (
+                                {addresses.map((address, index) => (
                                     <p onClick={() => {setSelectedAddress(address);setShowAddress(false)}} className="text-gray-500 p-2 hover:bg-gray-100">
                                     {address.street},{address.city}, {address.state}, {address.country}
                                 </p>
