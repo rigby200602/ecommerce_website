@@ -14,7 +14,8 @@ const authUser = async (req, res, next) => {
     } else {
       return res.json({ sucess: false, message: "Not Authorized" });
     }
-    next();
+    req.user = { _id: tokenDecode.id };
+    next()
   } catch (e) {
     res.json({ success: false, message: e.message });
   }
